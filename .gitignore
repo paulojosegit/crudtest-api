@@ -1,0 +1,11 @@
+
+.gradle
+
+.env
+.idea
+build/
+data/mysql/
+
+*.iml
+application.yml
+!**/src/main/**/build/
