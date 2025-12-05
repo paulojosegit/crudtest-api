@@ -8,6 +8,15 @@ CREATE TABLE IF NOT EXISTS customer (
     telephone VARCHAR(11) NOT NULL
 );
 
+CREATE TABLE IF NOT EXIST Products (
+    id_product INT AUTO_INCREMENT PRIMARY KEY,
+    name_product VARCHAR(50) NOT NOT NULL,
+    description VARCHAR(100),
+    sku VARCHAR(12),
+    base_price DECIMAL(10,2)
+
+)
+
 CREATE TABLE IF NOT EXIST orders (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     id_customer INT NOT NULL,
@@ -15,7 +24,7 @@ CREATE TABLE IF NOT EXIST orders (
     data_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     status_order VARCHAR(10) NOT NULL
     FOREIGN KEY (id_customer) REFERENCES (id)
-)
+);
 
 INSERT INTO customer (name,lastname,birthday,email,sex,telephone)
 VALUES ('Paulo','Campos','1984/12/14','paulo@gmail.com','M', '11988770011'),
