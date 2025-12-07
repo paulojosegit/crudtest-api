@@ -22,6 +22,12 @@ public class Customer {
     @Column("birthday")
     private String birthDay;
 
+    @Column("email")
+    private String email;
+
     @Column("sex")
     private String sex;
+
+    @Column("telephone")
+    private String telephone;
 }
