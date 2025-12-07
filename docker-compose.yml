@@ -17,7 +17,7 @@ services:
     volumes:
       - ./mysql/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
 
-  spring-dev:
+  spring:
     image: crudtest-api:1.0
     env_file: .env
     environment:
