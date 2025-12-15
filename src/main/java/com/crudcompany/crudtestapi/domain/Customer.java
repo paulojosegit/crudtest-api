@@ -5,8 +5,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.time.LocalDate;
+
 @Data
-@Table(name = "customer")
+@Table(name = "customers")
 public class Customer {
 
     @Id
@@ -20,7 +22,7 @@ public class Customer {
     private String lastName;
 
     @Column("birthday")
-    private String birthDay;
+    private LocalDate birthDay;
 
     @Column("email")
     private String email;
