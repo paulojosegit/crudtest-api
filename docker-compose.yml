@@ -1,4 +1,4 @@
-
+version: "3.9"
 
 services:
   mysql:
@@ -19,18 +19,44 @@ services:
 
   spring:
     image: crudtest-api:1.0
+    restart: always
     env_file: .env
+
     environment:
-      #application.yml
+      # Application
       SPRING_R2DBC_DATABASE: ${SPRING_R2DBC_DATABASE}
       SPRING_R2DBC_USER: ${SPRING_R2DBC_USER}
       SPRING_R2DBC_PASSWORD: ${SPRING_R2DBC_PASSWORD}
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
-    restart: always
+
+      # OpenTelemetry
+      JAVA_TOOL_OPTIONS: >
+        -javaagent:/otel/opentelemetry-javaagent.jar
+
+      OTEL_SERVICE_NAME: crudtest-api-local
+      OTEL_EXPORTER_OTLP_ENDPOINT: https://${DYNATRACE_TENANT}.live.dynatrace.com/api/v2/otlp
+      OTEL_EXPORTER_OTLP_HEADERS: Authorization=Api-Token\ ${DYNATRACE_API_TOKEN}
+
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_METRICS_EXPORTER: otlp
+      OTEL_LOGS_EXPORTER: otlp
+
+      OTEL_RESOURCE_ATTRIBUTES: >
+        service.namespace=local,
+        service.version=1.0.0,
+        deployment.environment=localhost
+
+      OTEL_LOG_LEVEL: info
+
+    volumes:
+      - ./opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar
+
     ports:
       - "8080:8080"
+
     networks:
       - backend
+
     depends_on:
       - mysql
 
