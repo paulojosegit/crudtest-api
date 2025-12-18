@@ -30,16 +30,17 @@ services:
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
 
       # OpenTelemetry
-      JAVA_TOOL_OPTIONS: >
-        -javaagent:/otel/opentelemetry-javaagent.jar
 
-      OTEL_SERVICE_NAME: crudtest-api-local
       OTEL_EXPORTER_OTLP_ENDPOINT: https://${DYNATRACE_TENANT}.live.dynatrace.com/api/v2/otlp
-      OTEL_EXPORTER_OTLP_HEADERS: Authorization=Api-Token\ ${DYNATRACE_API_TOKEN}
-
+      OTEL_EXPORTER_OTLP_HEADERS: Authorization=Api-Token ${DYNATRACE_API_TOKEN}
+      OTEL_TRACES_SAMPLER_ARG: 1.0
+      
+      OTEL_SERVICE_NAME: crudtest-api
       OTEL_TRACES_EXPORTER: otlp
       OTEL_METRICS_EXPORTER: otlp
       OTEL_LOGS_EXPORTER: otlp
+      OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+      OTEL_EXPORTER_OTLP_TIMEOUT: 10000
 
       OTEL_RESOURCE_ATTRIBUTES: >
         service.namespace=local,

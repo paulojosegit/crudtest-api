@@ -9,3 +9,5 @@ data/mysql/
 *.iml
 application.yml
 !**/src/main/**/build/
+
+opentelemetry-javaagent.jar

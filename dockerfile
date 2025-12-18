@@ -1,10 +1,17 @@
-FROM eclipse-temurin:21
+FROM eclipse-temurin:21-jre-jammy
 
 WORKDIR /app
 
-RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
+COPY build/libs/*.jar app.jar
+RUN mkdir /otel
+
+ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.23.0/opentelemetry-javaagent.jar \
+    /otel/opentelemetry-javaagent.jar
+
+RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup && chown -R appuser:appgroup /app /otel
 USER appuser
 
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
 EXPOSE 8080
+
+ENV JAVA_TOOL_OPTIONS="-javaagent:/otel/opentelemetry-javaagent.jar"
+ENTRYPOINT ["java","-jar","/app/app.jar"]
