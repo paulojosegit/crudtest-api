@@ -49,9 +49,6 @@ services:
 
       OTEL_LOG_LEVEL: info
 
-    volumes:
-      - ./opentelemetry-javaagent.jar:/otel/opentelemetry-javaagent.jar
-
     ports:
       - "8080:8080"
 
