@@ -9,7 +9,8 @@ import reactor.core.publisher.Flux;
 public class CustomerService {
     private final CustomerRepository repository;
 
-    public CustomerService(CustomerRepository repository) {
+    public CustomerService(CustomerRepository repository)
+    {
         this.repository = repository;
     }
 

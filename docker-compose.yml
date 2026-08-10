@@ -31,7 +31,9 @@ services:
 
       # OpenTelemetry
 
-      OTEL_EXPORTER_OTLP_ENDPOINT: https://${DYNATRACE_TENANT}.live.dynatrace.com/api/v2/otlp
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: https://${DYNATRACE_TENANT}.live.dynatrace.com/api/v2/otlp/v1/traces
+      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: https://${DYNATRACE_TENANT}.live.dynatrace.com/api/v2/otlp/v1/metrics
+      OTEL_EXPORTER_OTLP_LOGS_ENDPOINT: https://${DYNATRACE_TENANT}.live.dynatrace.com/api/v2/otlp/v1/logs
       OTEL_EXPORTER_OTLP_HEADERS: Authorization=Api-Token ${DYNATRACE_API_TOKEN}
       OTEL_TRACES_SAMPLER_ARG: 1.0
       
