@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 public class CustomerService {
     private final CustomerRepository repository;
 
-    private Logger logger = LoggerFactory.getLogger(CustomerRepository.class.getName());
+    private Logger logger = LoggerFactory.getLogger(CustomerService.class.getName());
 
     public CustomerService(CustomerRepository repository)
     {
@@ -21,7 +21,7 @@ public class CustomerService {
     }
 
     public Flux<Customer> findAll() {
-        logger.info("LOG DE TESTEEEEE");
+        logger.info("Iniciando a consulta ao repositório MYSQL");
         return repository.findAll();
 
     }
