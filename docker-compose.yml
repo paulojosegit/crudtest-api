@@ -1,4 +1,3 @@
-version: "3.9"
 
 services:
   mysql:
@@ -59,7 +58,7 @@ services:
       - backend
 
     depends_on:
-      - mysqlcls
+      - mysql
 
 networks:
   backend:
